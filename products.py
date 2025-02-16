@@ -61,7 +61,7 @@ try:
 except ValueError as e:
     mac = None
     print(e)
-
+'''
 try:
     print(bose.buy(50))
     print(mac.buy(100))
@@ -72,3 +72,4 @@ try:
     print(bose.show())
 except AttributeError as e:
     print(e)
+'''
