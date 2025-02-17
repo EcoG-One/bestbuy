@@ -33,13 +33,18 @@ def create_shopping_list(store):
             break
         try:
             product_index = int(choice) - 1
-            amount = int(input("What amount do you want? "))
+            while True:
+                amount = int(input("What amount do you want? "))
+                if amount > 0:
+                    break
+                else:
+                    print("Invalid amount")
         except ValueError:
             print("Error adding product!")
         else:
             active_products = store.get_all_products()
             if 0 <= product_index < len(active_products):
-                shopping_list.append((store.products[product_index], amount))
+                shopping_list.append((active_products[product_index], amount))
                 print("Product added to Shopping list!\n")
             else:
                 print("Error adding product!")

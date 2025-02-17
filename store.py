@@ -1,5 +1,3 @@
-from products import Product
-
 class Store():
     '''
     Holds all products and
@@ -28,8 +26,8 @@ class Store():
         '''
         try:
             self.products.remove(product)
-        except ValueError as e:
-            print(f'{e}: {product} does not exist in Store')
+        except ValueError:
+            print(f'{product} does not exist in Store')
 
 
     def get_total_quantity(self):

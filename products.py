@@ -53,10 +53,8 @@ class Product():
         Getter function for active.
         :return:  True if the product is active, otherwise False
         '''
-        if self.active:
-            return True
-        else:
-            return False
+        return self.active
+
 
     def activate(self):
         '''
