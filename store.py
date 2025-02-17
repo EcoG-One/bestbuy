@@ -1,16 +1,31 @@
 from products import Product
 
-
 class Store():
+    '''
+    Holds all products and
+    allows the user to make a purchase of multiple products at once
+    '''
     def __init__(self,products ):
+        '''
+        initiates the class
+        :param products: list of products that exist in the store
+        '''
         self.products = products
 
 
     def add_product(self, product):
+        '''
+        Adds a product to the store
+        :param product: the product to be added
+        '''
         self.products.append(product)
 
 
     def remove_product(self, product):
+        '''
+        Removes a product from store.
+        :param product: the product to be removed
+        '''
         try:
             self.products.remove(product)
         except ValueError as e:
@@ -18,6 +33,9 @@ class Store():
 
 
     def get_total_quantity(self):
+        '''
+        :return: how many items are in the store in total
+        '''
         total = 0
         for product in self.products:
             total += product.quantity
@@ -25,6 +43,9 @@ class Store():
 
 
     def get_all_products(self):
+        '''
+        :return: all products in the store that are active.
+        '''
         all_products = []
         for product in self.products:
             if product.is_active():
@@ -33,19 +54,18 @@ class Store():
 
 
     def order(self, shopping_list):
+        '''
+        Buys the products
+        :param shopping_list: a list of tuples,
+               where each tuple has 2 items:
+               Product (Product class) and quantity (int).
+        :return: the total price of the order.
+        '''
         total_price = 0
         for item in shopping_list:
-            item[0].quantity -= item[1]
-            total_price += item[1] * item[0].price
+            try:
+                total_price += item[0].buy(item[1])
+            except ValueError:
+                print(f'{item[0].name} not added to Shopping List. '
+                      f'Order quantity is larger than what exists')
         return total_price
-
-
-product_list = [Product("MacBook Air M2", price=1450, quantity=100),
-                Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                Product("Google Pixel 7", price=500, quantity=250),
-               ]
-
-best_buy = Store(product_list)
-products = best_buy.get_all_products()
-print(best_buy.get_total_quantity())
-print(best_buy.order([(products[0], 1), (products[1], 2)]))
