@@ -37,8 +37,7 @@ def create_shopping_list(store):
                 amount = int(input("What amount do you want? "))
                 if amount > 0:
                     break
-                else:
-                    print("Invalid amount")
+                print("Invalid amount")
         except ValueError:
             print("Error adding product!")
         else:
