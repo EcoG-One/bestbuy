@@ -10,14 +10,12 @@ class Store():
         '''
         self.products = products
 
-
     def add_product(self, product):
         '''
         Adds a product to the store
         :param product: the product to be added
         '''
         self.products.append(product)
-
 
     def remove_product(self, product):
         '''
@@ -29,7 +27,6 @@ class Store():
         except ValueError:
             print(f'{product} does not exist in Store')
 
-
     def get_total_quantity(self):
         '''
         :return: how many items are in the store in total
@@ -38,7 +35,6 @@ class Store():
         for product in self.products:
             total += product.quantity
         return total
-
 
     def get_all_products(self):
         '''
@@ -49,7 +45,6 @@ class Store():
             if product.is_active():
                 all_products.append(product)
         return all_products
-
 
     def order(self, shopping_list):
         '''

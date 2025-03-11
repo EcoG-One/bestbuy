@@ -26,8 +26,10 @@ class Product():
         self.name = name
         self.price = price
         self.quantity = quantity
-        self.active = True
-
+        if self.quantity > 0:
+            self.active = True
+        else:
+            self.active = False
 
     def get_quantity(self):
         '''
@@ -35,7 +37,6 @@ class Product():
         :return: the quantity of a product
         '''
         return self.quantity
-
 
     def set_quantity(self, quantity):
         '''
@@ -47,7 +48,6 @@ class Product():
         if self.quantity == 0:
             self.active = False
 
-
     def is_active(self):
         '''
         Getter function for active.
@@ -55,13 +55,11 @@ class Product():
         '''
         return self.active
 
-
     def activate(self):
         '''
         Activates the product.
         '''
         self.active = True
-
 
     def deactivate(self):
         '''
@@ -69,13 +67,11 @@ class Product():
         '''
         self.active = False
 
-
     def show(self):
         '''
         :return: a string that represents the product
         '''
         return f'{self.name}, Price: ${self.price}, Quantity: {self.quantity}'
-
 
     def buy(self, quantity):
         '''

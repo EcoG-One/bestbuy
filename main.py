@@ -12,20 +12,27 @@ def print_all_products(store):
     prints all products in the store that are active.
     :param store: the store that has the products
     '''
-    i = 1
     print(6 * "-")
-    for product in store.get_all_products():
-        print(f'{i}. {product.show()}')
-        i += 1
+    products_list = store.get_all_products()
+    if len(products_list) == 0:
+        print("No products in stock")
+    else:
+        i = 1
+        for product in products_list:
+            print(f'{i}. {product.show()}')
+            i += 1
     print(6 * "-")
+
 
 def create_shopping_list(store):
     '''
     Creates the Shopping List and makes the order
     :param store: the store we order to
     '''
-    shopping_list = []
     print_all_products(store)
+    if store.get_total_quantity() == 0:
+        return
+    shopping_list = []
     print('When you want to finish order, enter empty text.')
     while True:
         choice = input('Which product # do you want? ')
@@ -43,11 +50,21 @@ def create_shopping_list(store):
         else:
             active_products = store.get_all_products()
             if 0 <= product_index < len(active_products):
-                shopping_list.append((active_products[product_index], amount))
-                print("Product added to Shopping list!\n")
+                if active_products[product_index].get_quantity() >= amount:
+                    shopping_list.append(
+                        (active_products[product_index], amount)
+                    )
+                    print("Product added to Shopping list!\n")
+                else:
+                    print("Order quantity is larger than what exists."
+                          "Product not added to Shopping list!\n")
             else:
                 print("Error adding product!")
-    print(f'Order made! Total payment: ${store.order(shopping_list)}')
+    total = store.order(shopping_list)
+    if total > 0:
+        print(f'Order made! Total payment: ${total}')
+    else:
+        print("No order has been made")
 
 
 
@@ -76,6 +93,7 @@ def start(store):
         create_shopping_list(store)
     if choice == "4":
         return choice
+
 
 def main():
     '''
